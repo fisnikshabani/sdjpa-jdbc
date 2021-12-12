@@ -13,7 +13,9 @@ public class Book {
     private String title;
     private String isbn;
     private String publisher;
-    private Long authorId;
+
+    @Transient
+    private Author authorId;
 
     public Book() {
     }
@@ -56,11 +58,11 @@ public class Book {
         this.publisher = publisher;
     }
 
-    public Long getAuthorId() {
+    public Author getAuthor() {
         return authorId;
     }
 
-    public void setAuthorId(Long authorId) {
+    public void setAuthor(Author authorId) {
         this.authorId = authorId;
     }
 
