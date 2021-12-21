@@ -5,21 +5,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import javax.sql.DataSource;
-import java.sql.*;
-
 @Component
 public class AuthorDaoImpl implements AuthorDao{
 
     private final JdbcTemplate jdbcTemplate;
 
-    private final DataSource source;
-
-    public AuthorDaoImpl(JdbcTemplate jdbcTemplate, DataSource source) {
+    public AuthorDaoImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-
-        this.source = source;
     }
+
 
     @Override
     public Author getById(Long id) {
@@ -36,7 +30,11 @@ public class AuthorDaoImpl implements AuthorDao{
 
     @Override
     public Author saveNewAuthor(Author author) {
-        return null;
+
+        jdbcTemplate.update("INSERT INTO author(first_name, last_name) VALUES (?,?)",author.getFirstName(),author.getLastName());
+        Long createdId = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Long.class);
+
+        return this.getById(createdId);
     }
 
     @Override
