@@ -1,6 +1,7 @@
 package com.fisnikshabani.sdjpajdbc.dao;
 
 import com.fisnikshabani.sdjpajdbc.domain.Author;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
@@ -162,6 +163,10 @@ public class AuthorDaoImpl implements AuthorDao{
 
         }
 
+    }
+
+    private RowMapper<Author> getRowMapper(){
+        return new AuthorMapper();
     }
 
 
