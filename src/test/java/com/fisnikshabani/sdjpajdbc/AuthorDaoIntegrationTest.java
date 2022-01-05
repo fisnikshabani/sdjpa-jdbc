@@ -11,8 +11,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ActiveProfiles;
 
-import javax.sql.DataSource;
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @ActiveProfiles("local")
@@ -123,11 +121,11 @@ public class AuthorDaoIntegrationTest {
 
         Author saved = authorDao.saveNewAuthor(author);
 
-        saved.setLastName("Shabani");
+        saved.setLastName("sh");
 
         Author updated = authorDao.updateAuthor(saved);
 
-        assertThat(updated.getLastName()).isEqualTo("Shabani");
+        assertThat(updated.getLastName()).isEqualTo("sh");
     }
 
     @Test
